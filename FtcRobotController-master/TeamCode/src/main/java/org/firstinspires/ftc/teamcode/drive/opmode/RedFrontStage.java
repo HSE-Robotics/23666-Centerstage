@@ -300,7 +300,7 @@ public class RedFrontStage extends LinearOpMode {
                 stopR();
                 break;
 
-            }else if((x > 0 && x < 120) && (y>200 && y < 300)){
+            }else if((x > 0 && x < 120) && (y>180 && y < 320)){
                 cubePosition = "Left";
                 Muneca.setPosition(1.0);
                 sleep(300);
@@ -318,14 +318,14 @@ public class RedFrontStage extends LinearOpMode {
                 
                 strafe_right(0.3, 28, ticks_per_inch);
                 stopR();
-                /*
+
                 rotateLeft(0.15, 40, ticks_per_inch);
                 stopR();
-                */
+
                 drive(0.3, 75, ticks_per_inch);
                 stopR();
                 
-                strafe_left(0.3, 33, ticks_per_inch);
+                strafe_right(0.3, 33, ticks_per_inch);
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
@@ -339,7 +339,7 @@ public class RedFrontStage extends LinearOpMode {
                 LWT.setPower(0.0);
                 driveBack(0.3,5,ticks_per_inch);
                 stopR();
-                strafe_right(0.3,40, ticks_per_inch);
+                strafe_left(0.3,40, ticks_per_inch);
                 stopR();
                 
                 armDown();
