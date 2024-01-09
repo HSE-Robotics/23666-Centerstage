@@ -29,10 +29,6 @@ public class BananaJavaRR extends LinearOpMode {
    */
   @Override
   public void runOpMode() {
-    double x;
-    double y;
-    double z;
-    double denominator;
     double speed;
     BR = hardwareMap.get(DcMotor.class, "BR");
     FR = hardwareMap.get(DcMotor.class, "FR");
@@ -44,24 +40,23 @@ public class BananaJavaRR extends LinearOpMode {
     Muneca = hardwareMap.get(Servo.class, "Muneca");
     PlaneLauncher = hardwareMap.get(Servo.class, "AP");
     SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-    drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    drive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     // Put initialization blocks here.
     waitForStart();
     if (opModeIsActive()) {
-      // Put run blocks here.
+      //Get initialPosition from the Arm Current Position.
       int initialPosition = Arm.getCurrentPosition();
+      //Initialize the Arm to run using encoders and it's direction (REVERSE)
       Arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       Arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       Arm.setDirection(DcMotor.Direction.REVERSE);
+
+      //Set the movement speed of the robot
       speed=0.7;
 
-      //slider.setTargetPosition((initialPosition)+224);
-      //slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
       while (opModeIsActive()) {
-        // Put loop blocks here.
-        telemetry.addData("InitialPosition",initialPosition);
-        telemetry.addData("CurrentPosition",Arm.getCurrentPosition());
+        //We use the Roadrunner Weighted Drive
         drive.setWeightedDrivePower(
                 new Pose2d(
                         gamepad1.left_stick_y * speed,
@@ -71,56 +66,78 @@ public class BananaJavaRR extends LinearOpMode {
         );
 
         drive.update();
-        /* Old Code Driving
-        BR.setDirection(DcMotor.Direction.REVERSE);
-        FR.setDirection(DcMotor.Direction.REVERSE);
-        x = gamepad1.left_stick_x / 2;
-        y = gamepad1.left_stick_y / 2;
-        z = (gamepad1.right_stick_x / 2) * 1.1;
-        denominator = JavaUtil.averageOfList(JavaUtil.createListWith(JavaUtil.sumOfList(JavaUtil.createListWith(Math.abs(y), Math.abs(x), Math.abs(z))), 1));
-        FL.setPower((y - x - z) / denominator);
-        BL.setPower((y + x - z) / denominator);
-        FR.setPower((y + x + z) / denominator);
-        BR.setPower((y - x + z) / denominator);
-        */
+        //Arm Movement Code
+
         if(gamepad1.y){
+          // Arm to Score in a Medium High Position
           Arm.setTargetPosition(initialPosition + 1100);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(1);
         }else if(gamepad1.x){
+          // Set Arm to score in the lowest position
           Arm.setTargetPosition(initialPosition + 600);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(1);
         }else if(gamepad1.a){
+          //Arm to Initial Position / Arm Lifted to Keep Hanging
           Arm.setTargetPosition(initialPosition);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(1);
         }else if(gamepad1.b){
+          // Position Arm to Hang
           Arm.setTargetPosition(initialPosition + 2200);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(1);
+        }else if(gamepad1.dpad_left){
+          //Manually move arm up by 100
+          Arm.setTargetPosition(initialPosition + 100);
+          Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+          Arm.setPower(0.8);
+        }else if(gamepad1.dpad_right){
+          //Manually move arm down by 100
+          Arm.setTargetPosition(initialPosition - 100);
+          Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+          Arm.setPower(0.8);
+
+        }else if(gamepad1.right_stick_button){
+          //Manually set up the initial position to the Arm Current Position
+          //In case the Arm starts in a very off initial position
+          initialPosition = Arm.getCurrentPosition();
         }
+
+        //Intake/Outtake Code
         if (gamepad1.right_bumper) {
+          //Outtake
           RWT.setPower(1.0);
           LWT.setPower(-1.0);
-          
         } else if (gamepad1.left_bumper) {
+          //Intake
           RWT.setPower(-1.0);
           LWT.setPower(1.0);
         }else{
+          //Stop the intake/outtake
           RWT.setPower(0.0);
           LWT.setPower(0.0);
         }
+
+        //Wrist Code
         if (gamepad1.dpad_down) {
+          //Set the Wrist to score
           Muneca.setPosition(0.65);
         } else if (gamepad1.dpad_up) {
+          //Set the Wrist up
           Muneca.setPosition(1.0);
         }
+
+        //Drone Launcher Code
         if (gamepad1.share){
+          //Release the Drone
           PlaneLauncher.setPosition(1.0);
         }
-        telemetry.addData("key", "text");
 
+        //The Telemetry data shows the current position and initial position in case the Arm is not setup.
+        telemetry.addData("InitialPosition", initialPosition);
+        telemetry.addData("Arm Current Position", Arm.getCurrentPosition());
         telemetry.update();
       }
     }

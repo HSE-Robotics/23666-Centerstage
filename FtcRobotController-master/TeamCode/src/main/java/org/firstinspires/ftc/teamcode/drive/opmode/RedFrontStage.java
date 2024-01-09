@@ -51,7 +51,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Autonomous(name = "Red Front Stage", group = "Concept")
+@Autonomous(name = "Red Front Stage", group = "Concept", preselectTeleOp = "BananaJavaRR")
 
 public class RedFrontStage extends LinearOpMode {
      private DcMotor BR;
@@ -272,7 +272,7 @@ public class RedFrontStage extends LinearOpMode {
                 stopR();
                 strafe_right(0.3, 6, ticks_per_inch);
                 stopR();
-                drive(0.25,75, ticks_per_inch);
+                drive(0.35,75, ticks_per_inch);
                 stopR();
                 
                 //Move to the backdrop
@@ -305,36 +305,36 @@ public class RedFrontStage extends LinearOpMode {
                 Muneca.setPosition(1.0);
                 sleep(300);
                 //Drive to drop purple pixel
-                drive(0.3, 27,ticks_per_inch);
+                drive(0.4, 27,ticks_per_inch);
                 stopR();
                 rotateLeft(0.15, 20, ticks_per_inch);
                 stopR();
                 
-                drive(0.3, 9,ticks_per_inch);
+                drive(0.4, 7.5,ticks_per_inch);
                 stopR();
                 
-                driveBack(0.3, 10, ticks_per_inch);
+                driveBack(0.4, 10, ticks_per_inch);
                 stopR();
                 
-                strafe_right(0.3, 28, ticks_per_inch);
+                strafe_right(0.4, 28, ticks_per_inch);
                 stopR();
 
-                rotateLeft(0.15, 40, ticks_per_inch);
+                rotateLeft(0.15, 38, ticks_per_inch);
                 stopR();
 
                 drive(0.3, 75, ticks_per_inch);
                 stopR();
                 
-                strafe_right(0.3, 33, ticks_per_inch);
+                strafe_right(0.4, 40, ticks_per_inch);
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
                 Muneca.setPosition(0.8);
-                drive(0.15,20.5, ticks_per_inch);
+                drive(0.15,22, ticks_per_inch);
                 stopR();
                 RWT.setPower(-1.0);
                 LWT.setPower(1.0);
-                sleep(2000);
+                sleep(1000);
                 RWT.setPower(0.0);
                 LWT.setPower(0.0);
                 driveBack(0.3,5,ticks_per_inch);
@@ -347,7 +347,7 @@ public class RedFrontStage extends LinearOpMode {
                 drive(0.3, 10, ticks_per_inch);
                 stopR();
                 break;
-            }else if((x > 450 && x < 620) && (y>200 && y < 300)){
+            }else if((x > 450 && x < 620) && (y>180 && y < 300)){
                 cubePosition = "Right";
                 Muneca.setPosition(1.0);
                 sleep(200);
@@ -366,13 +366,13 @@ public class RedFrontStage extends LinearOpMode {
                 strafe_left(0.3, 28, ticks_per_inch);
                 stopR();
                 
-                rotateLeft(0.15, 40, ticks_per_inch);
+                /*rotateLeft(0.15, 40, ticks_per_inch);
+                stopR();*/
+                
+                drive(0.3, 80, ticks_per_inch);
                 stopR();
                 
-                drive(0.3, 75, ticks_per_inch);
-                stopR();
-                
-                strafe_left(0.3, 17, ticks_per_inch);
+                strafe_right(0.3, 34, ticks_per_inch);
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
@@ -386,7 +386,7 @@ public class RedFrontStage extends LinearOpMode {
                 LWT.setPower(0.0);
                 driveBack(0.3,5,ticks_per_inch);
                 stopR();
-                strafe_right(0.3,23, ticks_per_inch);
+                strafe_left(0.3,35, ticks_per_inch);
                 stopR();
                 
                 armDown();
