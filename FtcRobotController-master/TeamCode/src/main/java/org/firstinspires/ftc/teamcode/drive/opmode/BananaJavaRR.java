@@ -30,6 +30,7 @@ public class BananaJavaRR extends LinearOpMode {
   @Override
   public void runOpMode() {
     double speed;
+    double wristPosition;
     BR = hardwareMap.get(DcMotor.class, "BR");
     FR = hardwareMap.get(DcMotor.class, "FR");
     FL = hardwareMap.get(DcMotor.class, "FL");
@@ -54,6 +55,7 @@ public class BananaJavaRR extends LinearOpMode {
 
       //Set the movement speed of the robot
       speed=0.7;
+      wristPosition = Muneca.getPosition();
 
       while (opModeIsActive()) {
         //We use the Roadrunner Weighted Drive
@@ -106,14 +108,14 @@ public class BananaJavaRR extends LinearOpMode {
         }
 
         //Intake/Outtake Code
-        if (gamepad1.right_bumper) {
+        if (gamepad1.right_trigger > 0.0) {
           //Outtake
-          RWT.setPower(1.0);
-          LWT.setPower(-1.0);
-        } else if (gamepad1.left_bumper) {
+          RWT.setPower(gamepad1.right_trigger);
+          LWT.setPower(-gamepad1.right_trigger);
+        } else if (gamepad1.left_trigger > 0.0) {
           //Intake
-          RWT.setPower(-1.0);
-          LWT.setPower(1.0);
+          RWT.setPower(-gamepad1.left_trigger);
+          LWT.setPower(gamepad1.left_trigger);
         }else{
           //Stop the intake/outtake
           RWT.setPower(0.0);
@@ -127,6 +129,12 @@ public class BananaJavaRR extends LinearOpMode {
         } else if (gamepad1.dpad_up) {
           //Set the Wrist up
           Muneca.setPosition(1.0);
+        } else if (gamepad1.right_bumper && wristPosition>0.10) {
+          Muneca.setPosition(wristPosition - 0.10);
+          wristPosition = Muneca.getPosition();
+        } else if (gamepad1.left_bumper && wristPosition<1.0) {
+          Muneca.setPosition(wristPosition + 0.10);
+          wristPosition = Muneca.getPosition();
         }
 
         //Drone Launcher Code
@@ -135,9 +143,10 @@ public class BananaJavaRR extends LinearOpMode {
           PlaneLauncher.setPosition(1.0);
         }
 
-        //The Telemetry data shows the current position and initial position in case the Arm is not setup.
-        telemetry.addData("InitialPosition", initialPosition);
-        telemetry.addData("Arm Current Position", Arm.getCurrentPosition());
+        //The Telemetry data shows the current position and initial position in case the Arm is not setup.Also the Muneca Position.
+        telemetry.addData("InitialPosition: ", initialPosition);
+        telemetry.addData("Arm Current Position: ", Arm.getCurrentPosition());
+        telemetry.addData("Muneca Current Position: ", Muneca.getPosition());
         telemetry.update();
       }
     }
