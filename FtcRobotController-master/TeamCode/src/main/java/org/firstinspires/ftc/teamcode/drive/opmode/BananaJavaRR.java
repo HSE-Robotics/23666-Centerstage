@@ -92,12 +92,12 @@ public class BananaJavaRR extends LinearOpMode {
           Arm.setPower(1);
         }else if(gamepad1.dpad_left){
           //Manually move arm up by 100
-          Arm.setTargetPosition(initialPosition + 100);
+          Arm.setTargetPosition( Arm.getCurrentPosition() + 100);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(0.8);
         }else if(gamepad1.dpad_right){
           //Manually move arm down by 100
-          Arm.setTargetPosition(initialPosition - 100);
+          Arm.setTargetPosition( Arm.getCurrentPosition() - 100);
           Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           Arm.setPower(0.8);
 
@@ -125,15 +125,15 @@ public class BananaJavaRR extends LinearOpMode {
         //Wrist Code
         if (gamepad1.dpad_down) {
           //Set the Wrist to score
-          Muneca.setPosition(0.65);
+          Muneca.setPosition(0.20);
         } else if (gamepad1.dpad_up) {
           //Set the Wrist up
-          Muneca.setPosition(1.0);
+          Muneca.setPosition(0.55);
         } else if (gamepad1.right_bumper && wristPosition>0.10) {
-          Muneca.setPosition(wristPosition - 0.10);
+          Muneca.setPosition(wristPosition - 0.05);
           wristPosition = Muneca.getPosition();
         } else if (gamepad1.left_bumper && wristPosition<1.0) {
-          Muneca.setPosition(wristPosition + 0.10);
+          Muneca.setPosition(wristPosition + 0.05);
           wristPosition = Muneca.getPosition();
         }
 

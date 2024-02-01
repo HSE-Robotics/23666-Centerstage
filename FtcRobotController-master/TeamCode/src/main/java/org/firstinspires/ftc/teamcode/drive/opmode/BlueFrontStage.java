@@ -282,7 +282,7 @@ public class BlueFrontStage extends LinearOpMode {
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
-                Muneca.setPosition(0.8);
+                Muneca.setPosition(0.2);
                 drive(0.15,13.5, ticks_per_inch);
                 stopR();
                 RWT.setPower(-1.0);
@@ -330,7 +330,7 @@ public class BlueFrontStage extends LinearOpMode {
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
-                Muneca.setPosition(0.8);
+                Muneca.setPosition(0.2);
                 drive(0.15,20.5, ticks_per_inch);
                 stopR();
                 RWT.setPower(-1.0);
@@ -377,7 +377,7 @@ public class BlueFrontStage extends LinearOpMode {
                 
                 // Prepare arm to score and move towards backdrop
                 armToScore();
-                Muneca.setPosition(0.8);
+                Muneca.setPosition(0.2);
                 drive(0.15,17.5, ticks_per_inch);
                 stopR();
                 RWT.setPower(-1.0);

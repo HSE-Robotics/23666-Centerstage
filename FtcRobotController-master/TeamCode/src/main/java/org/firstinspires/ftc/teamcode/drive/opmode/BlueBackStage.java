@@ -279,7 +279,7 @@ public class BlueBackStage extends LinearOpMode {
                 
                 strafe_right(0.15, 1.75, ticks_per_inch);
                 stopR();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.20);
                 drive(0.15,17, ticks_per_inch);
                 stopR();
                 sleep(1000);
@@ -319,7 +319,7 @@ public class BlueBackStage extends LinearOpMode {
                 drive(0.3, 30, ticks_per_inch);
                 stopR();
                 armToScore();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.2);
                 //Position to score on Left BackDrop
                 strafe_right(0.15, 1.5, ticks_per_inch);
                 stopR();
@@ -361,7 +361,7 @@ public class BlueBackStage extends LinearOpMode {
                 drive(0.3,29, ticks_per_inch);
                 stopR();
                 armToScore();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.2);
                 //Position to score on Right BackDrop
                 strafe_right(0.15, 10, ticks_per_inch);
                 stopR();

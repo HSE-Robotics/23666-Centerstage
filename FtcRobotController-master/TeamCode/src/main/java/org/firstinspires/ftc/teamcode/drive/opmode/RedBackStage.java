@@ -278,7 +278,7 @@ public class RedBackStage extends LinearOpMode {
                 
                 strafe_left(0.15, 1.75, ticks_per_inch);
                 stopR();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.2);
                 drive(0.15,17, ticks_per_inch);
                 stopR();
                 sleep(1000);
@@ -319,7 +319,7 @@ public class RedBackStage extends LinearOpMode {
                 drive(0.3,28, ticks_per_inch);
                 stopR();
                 armToScore();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.2);
                 //Position to score on Right BackDrop
                 strafe_left(0.15, 6, ticks_per_inch);
                 stopR();
@@ -362,7 +362,7 @@ public class RedBackStage extends LinearOpMode {
                 drive(0.3, 30, ticks_per_inch);
                 stopR();
                 armToScore();
-                Muneca.setPosition(0.7);
+                Muneca.setPosition(0.2);
                 //Position to score on Left BackDrop
                 strafe_left(0.15, 1.5, ticks_per_inch);
                 stopR();
